@@ -1,0 +1,548 @@
+
+\documentclass{article}
+
+% Language setting
+% Replace english' with e.g. spanish' to change the document language
+\usepackage[english]{babel}
+
+% Set page size and margins
+% Replace letterpaper' with a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{listings}
+
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{mathpartir}
+
+\lstdefinelanguage{Rust}{%
+  sensitive%
+, morecomment=[l]{//}%
+, morecomment=[s]{/*}{*/}%
+, moredelim=[s][{\itshape\color[rgb]{0,0,0.75}}]{\#[}{]}%
+, morestring=[b]{"}%
+, alsodigit={}%
+, alsoother={}%
+, alsoletter={!}%
+%
+%
+% reserve keywords
+% traits
+% primitive types
+% type and value constructors
+% identifier
+%
+, morekeywords={break, continue, else, for, if, in, loop, match, return, while}  % control flow keywords
+, morekeywords={as, const, let, move, mut, ref, static}  % in the context of variables
+, morekeywords={dyn, enum, fn, impl, Self, self, struct, trait, type, union, use, where}  % in the context of declarations
+, morekeywords={crate, extern, mod, pub, super}  % in the context of modularisation
+, morekeywords={unsafe}  % markers
+, morekeywords={abstract, alignof, become, box, do, final, macro, offsetof, override, priv, proc, pure, sizeof, typeof, unsized, virtual, yield}  % reserved identifiers
+%
+% grep 'pub trait [A-Za-z][A-Za-z0-9]*' -r . | sed 's/^.*pub trait \([A-Za-z][A-Za-z0-9]*\).*/\1/g' | sort -u | tr '\n' ',' | sed 's/^\(.*\),$/{\1}\n/g' | sed 's/,/, /g'
+, morekeywords={Add, AddAssign, Any, AsciiExt, AsInner, AsInnerMut, AsMut, AsRawFd, AsRawHandle, AsRawSocket, AsRef, Binary, BitAnd, BitAndAssign, Bitor, BitOr, BitOrAssign, BitXor, BitXorAssign, Borrow, BorrowMut, Boxed, BoxPlace, BufRead, BuildHasher, CastInto, CharExt, Clone, CoerceUnsized, CommandExt, Copy, Debug, DecodableFloat, Default, Deref, DerefMut, DirBuilderExt, DirEntryExt, Display, Div, DivAssign, DoubleEndedIterator, DoubleEndedSearcher, Drop, EnvKey, Eq, Error, ExactSizeIterator, ExitStatusExt, Extend, FileExt, FileTypeExt, Float, Fn, FnBox, FnMut, FnOnce, Freeze, From, FromInner, FromIterator, FromRawFd, FromRawHandle, FromRawSocket, FromStr, FullOps, FusedIterator, Generator, Hash, Hasher, Index, IndexMut, InPlace, Int, Into, IntoCow, IntoInner, IntoIterator, IntoRawFd, IntoRawHandle, IntoRawSocket, IsMinusOne, IsZero, Iterator, JoinHandleExt, LargeInt, LowerExp, LowerHex, MetadataExt, Mul, MulAssign, Neg, Not, Octal, OpenOptionsExt, Ord, OsStrExt, OsStringExt, Packet, PartialEq, PartialOrd, Pattern, PermissionsExt, Place, Placer, Pointer, Product, Put, RangeArgument, RawFloat, Read, Rem, RemAssign, Seek, Shl, ShlAssign, Shr, ShrAssign, Sized, SliceConcatExt, SliceExt, SliceIndex, Stats, Step, StrExt, Sub, SubAssign, Sum, Sync, TDynBenchFn, Terminal, Termination, ToOwned, ToSocketAddrs, ToString, Try, TryFrom, TryInto, UnicodeStr, Unsize, UpperExp, UpperHex, WideInt, Write}
+, morekeywords={Send}  % additional traits
+%
+, morekeywords={bool, char, f32, f64, i8, i16, i32, i64, isize, str, u8, u16, u32, u64, unit, usize, i128, u128}  % primitive types
+%
+, morekeywords={Err, false, None, Ok, Some, true}  % prelude value constructors
+% grep 'pub \(type\|struct\|enum\) [A-Za-z][A-Za-z0-9]*' -r . | sed 's/^.*pub \(type\|struct\|enum\) \([A-Za-z][A-Za-z0-9]*\).*/\2/g' | sort -u | tr '\n' ',' | sed 's/^\(.*\),$/{\1}\n/g' | sed 's/,/, /g'    
+, morekeywords={AccessError, Adddf3, AddI128, AddoI128, AddoU128, ADDRESS, ADDRESS64, addrinfo, ADDRINFOA, AddrParseError, Addsf3, AddU128, advice, aiocb, Alignment, AllocErr, AnonPipe, Answer, Arc, Args, ArgsInnerDebug, ArgsOs, Argument, Arguments, ArgumentV1, Ashldi3, Ashlti3, Ashrdi3, Ashrti3, AssertParamIsClone, AssertParamIsCopy, AssertParamIsEq, AssertUnwindSafe, AtomicBool, AtomicPtr, Attr, auxtype, auxv, BackPlace, BacktraceContext, Barrier, BarrierWaitResult, Bencher, BenchMode, BenchSamples, BinaryHeap, BinaryHeapPlace, blkcnt, blkcnt64, blksize, BOOL, boolean, BOOLEAN, BoolTrie, BorrowError, BorrowMutError, Bound, Box, bpf, BTreeMap, BTreeSet, Bucket, BucketState, Buf, BufReader, BufWriter, Builder, BuildHasherDefault, BY, BYTE, Bytes, CannotReallocInPlace, cc, Cell, Chain, CHAR, CharIndices, CharPredicateSearcher, Chars, CharSearcher, CharsError, CharSliceSearcher, CharTryFromError, Child, ChildPipes, ChildStderr, ChildStdin, ChildStdio, ChildStdout, Chunks, ChunksMut, ciovec, clock, clockid, Cloned, cmsgcred, cmsghdr, CodePoint, Color, ColorConfig, Command, CommandEnv, Component, Components, CONDITION, condvar, Condvar, CONSOLE, CONTEXT, Count, Cow, cpu, CRITICAL, CStr, CString, CStringArray, Cursor, Cycle, CycleIter, daddr, DebugList, DebugMap, DebugSet, DebugStruct, DebugTuple, Decimal, Decoded, DecodeUtf16, DecodeUtf16Error, DecodeUtf8, DefaultEnvKey, DefaultHasher, dev, device, Difference, Digit32, DIR, DirBuilder, dircookie, dirent, dirent64, DirEntry, Discriminant, DISPATCHER, Display, Divdf3, Divdi3, Divmoddi4, Divmodsi4, Divsf3, Divsi3, Divti3, dl, Dl, Dlmalloc, Dns, DnsAnswer, DnsQuery, dqblk, Drain, DrainFilter, Dtor, Duration, DwarfReader, DWORD, DWORDLONG, DynamicLibrary, Edge, EHAction, EHContext, Elf32, Elf64, Empty, EmptyBucket, EncodeUtf16, EncodeWide, Entry, EntryPlace, Enumerate, Env, epoll, errno, Error, ErrorKind, EscapeDebug, EscapeDefault, EscapeUnicode, event, Event, eventrwflags, eventtype, ExactChunks, ExactChunksMut, EXCEPTION, Excess, ExchangeHeapSingleton, exit, exitcode, ExitStatus, Failure, fd, fdflags, fdsflags, fdstat, ff, fflags, File, FILE, FileAttr, filedelta, FileDesc, FilePermissions, filesize, filestat, FILETIME, filetype, FileType, Filter, FilterMap, Fixdfdi, Fixdfsi, Fixdfti, Fixsfdi, Fixsfsi, Fixsfti, Fixunsdfdi, Fixunsdfsi, Fixunsdfti, Fixunssfdi, Fixunssfsi, Fixunssfti, Flag, FlatMap, Floatdidf, FLOATING, Floatsidf, Floatsisf, Floattidf, Floattisf, Floatundidf, Floatunsidf, Floatunsisf, Floatuntidf, Floatuntisf, flock, ForceResult, FormatSpec, Formatted, Formatter, Fp, FpCategory, fpos, fpos64, fpreg, fpregset, FPUControlWord, Frame, FromBytesWithNulError, FromUtf16Error, FromUtf8Error, FrontPlace, fsblkcnt, fsfilcnt, fsflags, fsid, fstore, fsword, FullBucket, FullBucketMut, FullDecoded, Fuse, GapThenFull, GeneratorState, gid, glob, glob64, GlobalDlmalloc, greg, group, GROUP, Guard, GUID, Handle, HANDLE, Handler, HashMap, HashSet, Heap, HINSTANCE, HMODULE, hostent, HRESULT, id, idtype, if, ifaddrs, IMAGEHLP, Immut, in, in6, Incoming, Infallible, Initializer, ino, ino64, inode, input, InsertResult, Inspect, Instant, int16, int32, int64, int8, integer, IntermediateBox, Internal, Intersection, intmax, IntoInnerError, IntoIter, IntoStringError, intptr, InvalidSequence, iovec, ip, IpAddr, ipc, Ipv4Addr, ipv6, Ipv6Addr, Ipv6MulticastScope, Iter, IterMut, itimerspec, itimerval, jail, JoinHandle, JoinPathsError, KDHELP64, kevent, kevent64, key, Key, Keys, KV, l4, LARGE, lastlog, launchpad, Layout, Lazy, lconv, Leaf, LeafOrInternal, Lines, LinesAny, LineWriter, linger, linkcount, LinkedList, load, locale, LocalKey, LocalKeyState, Location, lock, LockResult, loff, LONG, lookup, lookupflags, LookupHost, LPBOOL, LPBY, LPBYTE, LPCSTR, LPCVOID, LPCWSTR, LPDWORD, LPFILETIME, LPHANDLE, LPOVERLAPPED, LPPROCESS, LPPROGRESS, LPSECURITY, LPSTARTUPINFO, LPSTR, LPVOID, LPWCH, LPWIN32, LPWSADATA, LPWSAPROTOCOL, LPWSTR, Lshrdi3, Lshrti3, lwpid, M128A, mach, major, Map, mcontext, Metadata, Metric, MetricMap, mflags, minor, mmsghdr, Moddi3, mode, Modsi3, Modti3, MonitorMsg, MOUNT, mprot, mq, mqd, msflags, msghdr, msginfo, msglen, msgqnum, msqid, Muldf3, Mulodi4, Mulosi4, Muloti4, Mulsf3, Multi3, Mut, Mutex, MutexGuard, MyCollection, n16, NamePadding, NativeLibBoilerplate, nfds, nl, nlink, NodeRef, NoneError, NonNull, NonZero, nthreads, NulError, OccupiedEntry, off, off64, oflags, Once, OnceState, OpenOptions, Option, Options, OptRes, Ordering, OsStr, OsString, Output, OVERLAPPED, Owned, Packet, PanicInfo, Param, ParseBoolError, ParseCharError, ParseError, ParseFloatError, ParseIntError, ParseResult, Part, passwd, Path, PathBuf, PCONDITION, PCONSOLE, Peekable, PeekMut, Permissions, PhantomData, pid, Pipes, PlaceBack, PlaceFront, PLARGE, PoisonError, pollfd, PopResult, port, Position, Powidf2, Powisf2, Prefix, PrefixComponent, PrintFormat, proc, Process, PROCESS, processentry, protoent, PSRWLOCK, pthread, ptr, ptrdiff, PVECTORED, Queue, radvisory, RandomState, Range, RangeFrom, RangeFull, RangeInclusive, RangeMut, RangeTo, RangeToInclusive, RawBucket, RawFd, RawHandle, RawPthread, RawSocket, RawTable, RawVec, Rc, ReadDir, Receiver, recv, RecvError, RecvTimeoutError, ReentrantMutex, ReentrantMutexGuard, Ref, RefCell, RefMut, REPARSE, Repeat, Result, Rev, Reverse, riflags, rights, rlim, rlim64, rlimit, rlimit64, roflags, Root, RSplit, RSplitMut, RSplitN, RSplitNMut, RUNTIME, rusage, RwLock, RWLock, RwLockReadGuard, RwLockWriteGuard, sa, SafeHash, Scan, sched, scope, sdflags, SearchResult, SearchStep, SECURITY, SeekFrom, segment, Select, SelectionResult, sem, sembuf, send, Sender, SendError, servent, sf, Shared, shmatt, shmid, ShortReader, ShouldPanic, Shutdown, siflags, sigaction, SigAction, sigevent, sighandler, siginfo, Sign, signal, signalfd, SignalToken, sigset, sigval, Sink, SipHasher, SipHasher13, SipHasher24, size, SIZE, Skip, SkipWhile, Slice, SmallBoolTrie, sockaddr, SOCKADDR, sockcred, Socket, SOCKET, SocketAddr, SocketAddrV4, SocketAddrV6, socklen, speed, Splice, Split, SplitMut, SplitN, SplitNMut, SplitPaths, SplitWhitespace, spwd, SRWLOCK, ssize, stack, STACKFRAME64, StartResult, STARTUPINFO, stat, Stat, stat64, statfs, statfs64, StaticKey, statvfs, StatVfs, statvfs64, Stderr, StderrLock, StderrTerminal, Stdin, StdinLock, Stdio, StdioPipes, Stdout, StdoutLock, StdoutTerminal, StepBy, String, StripPrefixError, StrSearcher, subclockflags, Subdf3, SubI128, SuboI128, SuboU128, subrwflags, subscription, Subsf3, SubU128, Summary, suseconds, SYMBOL, SYMBOLIC, SymmetricDifference, SyncSender, sysinfo, System, SystemTime, SystemTimeError, Take, TakeWhile, tcb, tcflag, TcpListener, TcpStream, TempDir, TermInfo, TerminfoTerminal, termios, termios2, TestDesc, TestDescAndFn, TestEvent, TestFn, TestName, TestOpts, TestResult, Thread, threadattr, threadentry, ThreadId, tid, time, time64, timespec, TimeSpec, timestamp, timeval, timeval32, timezone, tm, tms, ToLowercase, ToUppercase, TraitObject, TryFromIntError, TryFromSliceError, TryIter, TryLockError, TryLockResult, TryRecvError, TrySendError, TypeId, U64x2, ucontext, ucred, Udivdi3, Udivmoddi4, Udivmodsi4, Udivmodti4, Udivsi3, Udivti3, UdpSocket, uid, UINT, uint16, uint32, uint64, uint8, uintmax, uintptr, ulflags, ULONG, ULONGLONG, Umoddi3, Umodsi3, Umodti3, UnicodeVersion, Union, Unique, UnixDatagram, UnixListener, UnixStream, Unpacked, UnsafeCell, UNWIND, UpgradeResult, useconds, user, userdata, USHORT, Utf16Encoder, Utf8Error, Utf8Lossy, Utf8LossyChunk, Utf8LossyChunksIter, utimbuf, utmp, utmpx, utsname, uuid, VacantEntry, Values, ValuesMut, VarError, Variables, Vars, VarsOs, Vec, VecDeque, vm, Void, WaitTimeoutResult, WaitToken, wchar, WCHAR, Weak, whence, WIN32, WinConsole, Windows, WindowsEnvKey, winsize, WORD, Wrapping, wrlen, WSADATA, WSAPROTOCOL, WSAPROTOCOLCHAIN, Wtf8, Wtf8Buf, Wtf8CodePoints, xsw, xucred, Zip, zx}
+%
+, morekeywords={assert!, assert_eq!, assert_ne!, cfg!, column!, compile_error!, concat!, concat_idents!, debug_assert!, debug_assert_eq!, debug_assert_ne!, env!, eprint!, eprintln!, file!, format!, format_args!, include!, include_bytes!, include_str!, line!, module_path!, option_env!, panic!, print!, println!, select!, stringify!, thread_local!, try!, unimplemented!, unreachable!, vec!, write!, writeln!}  % prelude macros
+}%
+
+\lstdefinestyle{colouredRust}%
+{ basicstyle=\ttfamily%
+, identifierstyle=%
+, commentstyle=\color[gray]{0.4}%
+, stringstyle=\color[rgb]{0, 0, 0.5}%
+, keywordstyle=\bfseries% reserved keywords
+, keywordstyle=\color[rgb]{0.75, 0, 0}% traits
+, keywordstyle=\color[rgb]{0, 0.5, 0}% primitive types
+, keywordstyle=\color[rgb]{0, 0.5, 0}% type and value constructors
+, keywordstyle=\color[rgb]{0, 0, 0.75}% macros
+, columns=spaceflexible%
+, keepspaces=true%
+, showspaces=false%
+, showtabs=false%
+, showstringspaces=true%
+}%
+
+\lstdefinestyle{boxed}{
+  style=colouredRust%
+, numbers=left%
+, firstnumber=auto%
+, numberblanklines=true%
+, frame=trbL%
+, numberstyle=\tiny%
+, frame=leftline%
+, numbersep=7pt%
+, framesep=5pt%
+, framerule=10pt%
+, xleftmargin=15pt%
+, backgroundcolor=\color[gray]{0.97}%
+, rulecolor=\color[gray]{0.90}%
+}
+
+\title{Your Paper}
+\author{You}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Your abstract.
+\end{abstract}
+
+\section{Introduction}
+
+This document introduces a new algorithm to translate Rare rules into rewrite rules for Egglog, together with an elaboration of computational components from Eunoia.
+
+\section{Rare to Egglog}
+
+\begin{figure}[h]
+\centering
+\[
+\begin{aligned}
+\langle\mathit{rule}\rangle \;::=&\;\bigl(\,\texttt{define-rare-rule}\;\langle\mathit{symbol}\rangle\;(\langle\mathit{par}\rangle)^*\;\langle\mathit{expr}\rangle\;\langle\mathit{expr}\rangle\bigr)\\
+\langle\mathit{par}\rangle\;::=&\;\langle\mathit{symbol}\rangle\;\langle\mathit{sort}\rangle\;\langle\mathit{attr}\rangle\\[0.5ex]
+%%
+\langle\mathit{sort}\rangle\;::=&\;\ ?\quad\mid\quad \langle\mathit{symbol}\rangle\quad\mid\quad
+  \bigl(\,\langle\mathit{symbol}\rangle\;(\langle\mathit{sort}\rangle)^+\bigr)
+  \quad\mid\quad
+  \bigl(_\langle\mathit{symbol}\rangle\;(\langle\mathit{idx}\rangle)^+\bigr)\\[0.5ex]
+%%
+\langle\mathit{idx}\rangle\;::=&\;\ ?\quad\mid\quad \langle\mathit{numeral}\rangle\\[0.5ex]
+\langle\mathit{attr}\rangle\;::=&\;\mathit{:list}\quad\mid\quad \epsilon\\[0.5ex]
+%%
+\langle\mathit{id}\rangle\;::=&\;\langle\mathit{symbol}\rangle
+  \quad\mid\quad _\langle\mathit{symbol}\rangle\;(\langle\mathit{idx}\rangle)^+\\[0.5ex]
+%%
+\langle\mathit{let}\rangle\;::=&\;\bigl(\,\texttt{eo::define}\;(\langle\mathit{binding}\rangle)^+\;\langle\mathit{expr}\rangle\bigr)\\[0.5ex]
+%%
+\langle\mathit{binding}\rangle\;::=&\;\bigl(\,\langle\mathit{symbol}\rangle\;\langle\mathit{expr}\rangle\bigr)
+\end{aligned}
+\]
+\caption{\label{fig:fig1} Overview of the grammar of RARE. Adapted from~\cite{10026573}.}
+\end{figure}
+
+Each $expr$ in Figure~\ref{fig:fig1} denotes a subterm of Alethe \cite{Schurr_2021}, in \emph{equational} form. In other words, an Alethe expression such as $(= x\:y)$ is a sorted equality and the sorts of $x$ and $y$ are equal, and this equation has a Boolean sort. 
+
+To help us denote the transition between terms and their rewritten forms, let's describe the rules using first-order semantics and a context $\Delta$. We define $R$ as the set of all Rare rules and $\sigma$ as a sorted substitution ${x\longrightarrow y}$, such that if any variable $x$ in $\sigma$ occurs in $M$, then $M/\sigma$ replaces $x$ with $y$. Finally, a Rare rewrite rule $r$ is an arrow $r : \{(x_{0} : Sort_{0} :Attr_{0}?, ..., x_{n} : Sort_{n} :Attr_{n}?)\} \rightarrow \{(= e_{0} e'_{0}), ...,  (= e_{j} e'_{j})\} \subset \Delta \rightarrow (= e_{c}\: e'_{c}) \in \Delta$. Notice that $(= e_{j}\:e'_{j}) \in \Delta$ only if $\sigma=\{x_{0} \longrightarrow y_{0}, ..., x_{n} \longrightarrow y_{n}\}$ and $(r \{(x_{0}, ..., x_{n}\}, M/[\sigma] \in \Delta)$; i.e., the premise rules of $r$, if any, must also be satisfied in the context $\Delta$. A term $n$ can be rewritten to $m$ if there is a transitive relation in $\Delta$, such as $\{(= n\:e_{0}), ..., (= e_{0}\:e_{1}), ..., (= e_{t-1}\:e_{t}), ..., (= e_{t}\:m)\}$, where $t$ stands for the number of applied rules. Notice that we axiomatically assume that reflexivity, symmetry, and any congruence relation hold. We use the same definition to translate a proof to Alethe; in brief, evidence that a term can be derived in Alethe is an indexed subset $S \subseteq \Delta$ written in Alethe.
+
+\begin{figure}[h]
+\centering
+\[
+\begin{aligned}
+(step\:S_{0} :r_{0}. ...)\: \\
+(step\:S_{j} :r_{j}. ...)\: 
+\end{aligned}
+\]
+\caption{\label{fig:fig2} Overview of an Alethe proof of a rewrite.}
+\end{figure}
+
+Such $S$ in Figure~\ref{fig:fig2} is a transitive relation. The same definition applies to Egglog; however, there are some subtle differences. First, a term $n$ can be rewritten to $m$ in Egglog, first, if $n \in EGraph$ and, second, if there is a transitive relation such that the right side of some rule becomes $m$. The definition of an EGraph is only relevant to us if the rewrite engine respects the usual rules for congruence, which is the case here, so we avoid, for now, delving into the details of EGraphs. For our work, let's use a subset of Egglog:
+
+\begin{figure}
+\begin{lstlisting}
+program = { command } ;
+command = "(" , ( datatype_def | relation_def | rewrite_rule | rule_def | constructor_cmd | union_cmd | available_cmd | let_binding | run_cmd | check_cmd ) , ")" ;
+datatype_def    = "datatype" , identifier , { constructor } ;
+constructor     = "(" , identifier , { type } , ")" ;
+relation_def    = "relation" , identifier , "(" , { type } , ")" ;
+constructor_cmd = "constructor" , identifier , "(" , { type } , ")" , type ;
+rewrite_rule = "rewrite" , term , term , [ ":when" , "(" , { condition } , ")" ] ;
+rule_def     = "rule" , "(" , { premise } , ")" , "(" , { conclusion } , ")" ;
+condition    = "(" , "=" , term , term , ")" ;
+premise      = term | condition ;
+conclusion   = "(" , "union" , term , term , ")" | term ;
+(* Actions and Assertions *)
+union_cmd     = "union" , term , term ;
+available_cmd = "Available" , term ;
+let_binding   = "let" , identifier , term ;
+check_cmd     = "check" , condition ;
+run_cmd  = "run-schedule" , schedule ;
+schedule = "(" , "repeat" , integer , "(" , "run" , ")" , ")" | "(" , "run" , ")" ;
+term = identifier | literal | "(" , constructor_name , { term } , ")" ;
+constructor_name = identifier | "@" , identifier ;
+type = "Term" | "String" | "bool" | "i64" | identifier ;
+\end{lstlisting}
+\caption{\label{fig:fig3} Overview of the subset of Egglog grammar.}
+\end{figure}
+
+Since the core of Egglog is quite large, we are not going to go into a full semantic formalization of Egglog. So let's consider an oracle \emph{Egglog*}; this oracle has two key points:
+
+\begin{align}
+    (rewrite\:T\:T'\: :when \{(p_{1}, ..., p_{n})\}) \\
+    (union\:T\:T') \\
+    (rule\:((p_{1}, ..., p_{n}))\: ((actions...)))
+\end{align}
+
+The action (1) defines a rewrite relation if the premises of `:when` are satisfied. In our framework, this is isomorphic to a usual Rare rule; the subtle difference lies in the \emph{equality saturation}. In Rare, we do not need to produce new terms by saturating. For example, consider the following rewrite rule:
+
+\begin{align}
+    (rewrite\:(F X)\:(F (F X))\ : :when (()))
+\end{align}
+
+Given that we run this rewrite rule $n$ times, we get a proportional number of $F$, which is also added to the EGraph, that may be rewritten into something else or not. However, this points out that equality saturation is not complete and is especially expensive if the rules produce new terms in a \emph{free fixpoint} style. (2) simply adds a new e-class and joins it to the same one; we could think of this as a rewriting instance as well. An action (3) is a free form of a rule; given a set of premises $p$ indexed by $n$, we can perform any special action on them. For example, if we decide to \emph{desugar} the rewrite action, we could write $(rewrite\:T\:T') = (rule ((= \_\_var\:T))\:(union\:\_\_var \:T'))$.
+
+\subsection{Translating}
+Before any translation, we need to establish a mechanism to translate Alethe terms to Egglog. As mentioned before, every Rare rule contains a sub-term of Alethe, so representing the AST of Alethe in Egglog is a primary requirement. 
+
+\begin{lstlisting}
+(datatype Term (App Term Term) (Var String) (Bool bool)
+   (Num i64) (Op String) (Empty) (Args Term Term) (Mk Term))
+\end{lstlisting}
+
+Datatypes in Egglog do not act like usual ones; they are especially symbolic, no pattern matching is allowed, and only equality is derived by simple syntactic comparison. `i64` and `String` are built into the Egglog language. Applications in Alethe are first-order terms; we translate them to constructors. For example, the `or` operator is represented by:
+
+\begin{lstlisting}
+    (constructor @or (Term) Term)
+\end{lstlisting}
+
+Since some operators and functions are variadic, they receive a list of arguments. For example, $(or\:x\:y)$ is equal to $(@or\:(Args\:(Var\:x)\:(Args\:(Var\:y)\:(Empty))))$. Let's introduce `to\_egg\_expr`:
+
+\begin{lstlisting}[language=Rust]
+fn toEgg(term, subs, cache, collect) -> Option<Expr> {
+  // 1. "Raw" conversion
+  let raw = match term {
+    // a) Constants -> literals
+    Const(i)           => Num(i),
+    // b) Variables -> substitution or bare Var
+    Var(name)          => substitute(name, subs)
+                            .unwrap_or(Var(name)),
+    // c) Any application or operator with arguments
+    (head, args) if args.not_empty() => {
+      recordShape(head, args.len(), cache, collect)
+
+      // "convert_args_to_list" does:
+      //   . recurse into each arg
+      //   . drop failures
+      //   . reverse result
+      //   . pack into linked-list Args form
+      let list = convert_args_to_list(args, subs, cache, collect)
+
+      Call("@" + head, list)
+    }
+    // d) Special RareList operator -> just the Args list
+    RareList(args)     => convert_args_to_list(args, subs, cache, collect),
+    // e) Zero-arg booleans
+    (True,  [])        => Bool(true),
+    (False, [])        => Bool(false),
+
+    // f) Anything else fails
+    _                  => return None
+  }
+  // 2. Wrap in Mk(...) if needed
+  wrap_if_needed(raw, subs)
+}
+\end{lstlisting}
+
+`wrap\_if\_needed` is a constructor used only to satisfy the type inference of Egglog. Consider $(rewrite T\:T'\::when ((= T'\:T)))$. What are $T$ and $T'$? If we include $(Mk T)$, we know that our domain is `Term` from our datatype, and the definition is accepted since type inference is possible. (\emph{Although this kind of rule, where only variables appear, is not usual.})
+
+Now that we have a way of writing Alethe terms in Egglog, it is easier to define a translation for Rare rewrite rules. Consider:
+
+\begin{lstlisting}
+(declare-rare-rule arith-mul-one ((@T0 Type ) (@T1 Type ) (t1 @T0 :list) 
+    (s1 @T1 :list))
+  :args (t1 s1)
+  :premises ()
+  :conclusion (= (* t1 1 s1) (* t1 s1)))
+\end{lstlisting}
+
+We should produce:
+\begin{lstlisting}
+(rewrite (Mk (@* (Args t1 (Args (Mk (Num 1)) (Args s1 (Empty ))))))
+    (Mk (@* (Args t1 (Args s1 (Empty ))))))
+\end{lstlisting}
+
+In this case, it is easy to assume that both rules represent semantically the same result, but this is an incorrect assumption. Due to the nature of EGraphs in Egglog, to trigger the rule, we need a term inside the EGraph that matches the left side of the rule. In Rare, we just need to fulfill the arguments to obtain the right side, which makes `arith-mul-one` close to a function, while the definition in Egglog seems more appropriately related to a morphism between terms. 
+
+Suppose that we have a proof $\Delta$ in Rare that there is a transitive relation from $t$ to $t'$; in order to reconstruct the same proof in Egglog, we need to insert the triggering terms into the EGraph. We may also consider that sometimes we can trigger some equality saturation that is exponentially costly. While a translation from a Rare proof to Egglog might be complete, it may not be feasible.
+
+To fulfill our goal, we need to push the terms to the EGraph. Let's assume that any proof written in Alethe uses a set of premises mentioned in the `step` clause:
+
+\begin{lstlisting}
+(step a0 (cl (= false true)) :rule hole :premises (a2 a3 a4 a5) :args ("TRUST_THEORY_REWRITE" b))
+\end{lstlisting}
+
+In this case, for example, for (a2, a3, a4, a5), the terms and their subterms must be inside the EGraph. Furthermore, we introduce a new relation called `Available`, where we set that every premise is `Available`.
+
+\begin{lstlisting}
+(relation Available (Term))
+(Available (MK (Bool False)))
+(Available (MK (Bool True)))
+...
+\end{lstlisting}
+
+A relation in Egglog acts like a fact in a Datalog setting. We can insert a new fact by calling `Available` on a new `Term`, and later, we can check if any term is indeed `Available` to construct new actions. We will introduce the need for an availability relation later. 
+
+\begin{lstlisting}[language=Rust]
+fn constructPremises(pool, premises, cache) -> EggLanguage {
+  // 1. Normalize each assumption into an optional clause
+  //    (internally calls clauses_to_or(pool, assumption.clause()))
+  let clauses = premises
+    .getAssumptions()
+    .filter_map(|assump| normalizeClause(pool, assump));
+
+  // 2. For each clause, build 0-2 statements:
+  //    . If it's an equality, emit a Union statement
+  //    . Always emit a Premise statement
+  clauses
+    .flat_map(|clause| {
+      let mut stmts = [];
+
+      // extractEquality -> Option<(lhs, rhs)> via get_equational_terms
+      if let Some((lhs, rhs)) = extractEquality(&clause) {
+        // toEggExpr turns a Term into an EggExpr
+        let leftExpr  = toEggExpr(lhs, subsEmpty(), cache, false);
+        let rightExpr = toEggExpr(rhs, subsEmpty(), cache, false);
+        stmts.push(makeUnion(leftExpr, rightExpr));
+      }
+
+      // Always add the raw clause as a premise
+      let clauseExpr = toEggExpr(&clause, subsEmpty(), cache, false);
+      stmts.push(makePremise("Available", clauseExpr));
+
+      stmts
+    })
+    .collect()
+}
+\end{lstlisting}
+
+Now we just need to convert any Rare rule by reading its premises as `:when` clauses and its conclusion as the left and right sides of the Egglog rule. 
+
+\begin{lstlisting}[language=Rust]
+fn convert_equality_to_egg(T : Term) -> EggLanguage {
+    let (left, right) = T;
+    return EggLanguage::Equal(to_egg(left), to_egg(right))
+}
+fn compile_rare_rule(R: Rule) -> EggLanguage {
+    return EggLanguage::Rewrite(convert_equality_to_egg(R.conclusion), 
+       R.premises.map(|r| convert_equality_to_egg(r)));
+}
+\end{lstlisting}
+
+Let's explore a simple example:
+
+\begin{lstlisting}[language=Rust]
+(assume a6 (= k 1))
+(step a0 (cl (= (* 2 k 10 3) (* 2 10 3))) :rule hole :premises (a6) :args ("TRUST_THEORY_REWRITE" b))
+\end{lstlisting}
+
+We generate:
+\begin{lstlisting}[language=Rust]
+
+(datatype Term (App Term Term) (Var String) (Bool bool) (Num i64) (Op String) (Empty)
+   (Args Term Term) (Mk Term))
+(relation Available (Term))
+...
+(constructor @and (Term) Term)
+...
+(constructor @* (Term) Term)
+...
+(rewrite (Mk (@* (Args t1 (Args (Mk (Num 1)) (Args s1 (Empty )))))) (Mk (@* (Args t1 (Args s1 (Empty ))))))
+(rewrite (Mk (@* (Args t1 (Args (Mk (Num 0)) (Args s1 (Empty )))))) (Mk (Num 0)))
+...
+(Available (Mk (@= (Args (Mk (Var "k")) (Args (Mk (Num 1)) (Empty ))))))
+(let goal_lhs (Mk (@* (Args (Mk (Num 2)) (Args (Mk (Var "k")) (Args (Mk (Num 10)) 
+   (Args (Mk (Num 3)) (Empty ))))))))
+(let goal_rhs (Mk (@* (Args (Mk (Num 2)) (Args (Mk (Num 10))
+   (Args (Mk (Num 3)) (Empty )))))))
+(Available goal_lhs)
+(Available goal_rhs)
+(run-schedule (repeat 5 (run)))
+(check (= goal_lhs goal_rhs))
+\end{lstlisting}
+
+\subsection{Dealing with Rare Lists}
+Some rules in Rare may contain an attribute that makes an argument act as a list.
+\begin{lstlisting}[language=Rust]
+(declare-rare-rule arith-mul-one ((@T0 Type) (@T1 Type) (t1 @T0 :list) 
+   (s1 @T1 :list))
+  :args (t1 s1)
+  :conclusion (= (* t1 1 s1) (* t1 s1))
+)
+\end{lstlisting}
+
+Since multiplication is variadic in SMT-LIB, $s1$ is a list of arguments and can be applied to many arguments. As we already know, Egglog does not support variadic arguments by default. We enable it by using a flattening rule for arguments, so any free variable in Egglog can also match an argument `Mk`, an `Args`, or an `Args` nested inside another `Args`. We just need to guarantee associativity, for example, that `Args(Args(t1, t2), t3)` is equivalent to `Args(t1, Args(t2, t3))`. Also empty arguments is associated with default values, for example, $(or) \rightarrow false$, we include it by creating for each operator that supports variadic arguments a new rewrite rule in EggLog $(@op) \rightarrow default\_value(@op)$.
+
+\begin{figure}
+\centering
+\begin{align*}
+  (\textsc{Assoc})\quad
+  \mathsf{Args}\bigl(\mathsf{Args}(t_{1},t_{2}),t_{3}\bigr)
+  &\longrightarrow
+  \mathsf{Args}\bigl(t_{1},\mathsf{Args}(t_{2},t_{3})\bigr),\\[6pt]
+  (\textsc{CoAssoc})\quad
+  \mathsf{Args}\bigl(t_{1},\mathsf{Args}(t_{2},t_{3})\bigr)
+  &\longrightarrow
+  \mathsf{Args}\bigl(\mathsf{Args}(t_{1},t_{2}),t_{3}\bigr),\\[6pt]
+  (\textsc{MkEq})\quad
+  \frac{Mk(x)=Mk(y)}{\mathsf{union}(x,y)},\\[6pt]
+  (\textsc{Unit-Intro})\quad
+  \mathsf{Args}(t_{1},t_{2})
+  &\longrightarrow
+  \mathsf{Args}\bigl(\mathsf{Args}(t_{1},\emptyset),t_{2}\bigr),\\[6pt]
+  (\textsc{Unit-Elim})\quad
+  \mathsf{Args}\bigl(\mathsf{Args}(t_{1},\emptyset),t_{2}\bigr)
+  &\longrightarrow
+  \mathsf{Args}(t_{1},t_{2}).
+\end{align*}
+\caption{Axiomatic rules included in every translation}
+\label{fig:fig4}
+\end{figure}
+
+\section{Eunoia to Egglog}
+Many fragments of Rare may contain Eunoia fragments; this subset relies on pattern matching and some first-order terms.
+
+\begin{lstlisting}
+; program: check_not_not
+; args:
+; - conclusion Bool: Conclusion given to rule not_not.
+; return: >
+;   A boolean indicating if conclusion is equivalent to the proposition
+(program $check_not_not ((phi Bool))
+    (Bool Bool) Bool
+    (
+    (($check_not_not (not (not (not phi)) phi) true)
+    )
+)
+\end{lstlisting}
+
+`$check\_not\_not$ involves pattern matching. Although it resembles pattern matching from functional programming, this one may not be evaluated if the patterns on the left side are never matched, so we should not see it as a function but rather as a relation setting a new equality property.
+
+\begin{lstlisting}[language=Rust]
+(declare-rare-rule reduce_not_not (x Bool) (y Bool)
+  :args (x)
+  :premises ((= ($check_not_not x y) true))
+  :conclusion (= x y)
+)
+\end{lstlisting}
+
+`$reduce\_not\_not$ creates a rewrite rule that evaluates $not\:(not\:(not\:x)) \rightarrow x$. By default, Egglog does not let us do any kind of pattern matching, so we need to elaborate these program statements into some form of rewrite rule. Usually, in compilers, pattern matching is eliminated using a decision tree, where each node represents a decision to take (yes or no) and the path represents the matched pattern. In our example, it is easy to see that `$check\_not\_not$ can be rewritten in Rare as one rule to deal with the first pattern:
+
+\begin{lstlisting}[language=Rust]
+(declare-rare-rule $check_not_not_0 ((_0 Bool ) (_1 Bool ) (phi Bool ) )
+  :args (phi _0 _1 )
+  :premises ((= _0 (not (not (not phi)))) (= _1 phi) )
+  :conclusion (= ($check_not_not _0 _1) true))
+\end{lstlisting}
+
+The new `\_0`, `\_1` arguments are created by ensuring that we need the main arguments to apply the rules; the others simulate the behavior of Eunoia pattern matching (see \url{https://github.com/cvc5/ethos/blob/main/user_manual.md} for more details). Since we can guarantee that by using guards we match the arguments, we only need to deal with overlapping clauses, for example, in cases like:
+
+\begin{lstlisting}[language=Rust]
+(program $lt ((x Int) (y Int))
+    :signature (Int Int) Bool
+    (
+    (($lt 0 0) false)
+    (($lt 0 x) true)
+    (($lt x y) ($lt (- x 1) (- y 1)))
+    )
+)
+\end{lstlisting}
+
+Now we need to ensure that the first and second arguments match the clause, but also respect the order of pattern matching application. Ordering can be simulated by applying negative guards that ensure, for example, that the second clause can only be tested if `x` is not equal to 0. Applying negative guards naively is also a problem; sometimes, rules do not overlap due to unification, which leads to a quadratic pattern complexity. For example, if the second argument were $(\$lt\:1\:x)$, we would not need to guarantee that `x` is not 0, and since `x` disambiguates the clause, there is also no need to guarantee that `y` is not 0. To check these cases, we need to test unification and create a vector of disambiguation. A disambiguation vector is like a decision tree; however, it only captures and sorts overlapping clauses. A triple $(p,\:i,\:T)$ is a pattern $p$ indexed by $i$ with a sorted vector $T$. We start by creating a new leaf node when inserting a pattern into an empty tree:
+
+$$\frac{}{\langle p_i, i, \emptyset \rangle \Downarrow (p_i, \{i\}, \emptyset)} \quad (\text{Build-Empty})$$
+
+If $p_i$ unifies/conflicts with $p_j$, its index $i$ is added to the node's conflict set. This process continues recursively.
+
+$$\frac{U(p_i, p_j) \quad \langle p_i, i, \mathcal{T}_{next} \rangle \Downarrow \mathcal{T}'_{next}}{\langle p_i, i, (p_j, I_j, \mathcal{T}_{next}) \rangle \Downarrow (p_j, I_j \cup \{i\}, \mathcal{T}'_{next})} \quad (\text{Build-Unify})$$
+
+If not, we just discard the pattern-matching equation, since it already disambiguates from other patterns.
+
+$$\frac{\neg U(p_i, p_j) \quad \langle p_i, i, \mathcal{T}_{next} \rangle \Downarrow \mathcal{T}'_{next}}{\langle p_i, i, (p_j, I_j, \mathcal{T}_{next}) \rangle \Downarrow (p_j, I_j, \mathcal{T}'_{next})} \quad (\text{Build-NoUnify})$$ 
+
+Now, to get our conflict set $CST$ from a pattern $p_k$, we start by stating that if $CST$ is empty, no conflicts are found.
+
+$$\frac{}{\emptyset \vdash (p_k, k) \Rightarrow \emptyset} \quad (\text{Collect-Empty})$$
+
+When collecting conflicts for pattern $p_k$, if its index $k$ is found in a node's conflict set $I_j$, we generate the distinctness premises between the node's pattern $p_j$ and $p_k$. These are added to any premises found in the rest of the tree.
+$$\frac{k \in I_j \quad \mathcal{T}_{next} \vdash (p_k, k) \Rightarrow \text{CSet}_{next}}{(p_j, I_j, \mathcal{T}_{next}) \vdash (p_k, k) \Rightarrow \text{CSet}_{next} \cup \text{Diff}(p_j, p_k)} \quad (\text{Collect-In})$$
+
+If the index $k$ is not in the current node's conflict set, no premises are generated at this node, and we only consider the conflicts from the rest of the tree.
+$$\frac{k \notin I_j \quad \mathcal{T}_{next} \vdash (p_k, k) \Rightarrow \text{CSet}_{next}}{(p_j, I_j, \mathcal{T}_{next}) \vdash (p_k, k) \Rightarrow \text{CSet}_{next}} \quad (\text{Collect-Out})$$
+
+So now we have an algorithm to create the set of guards we need by using $CST$ given a pattern list. So we should be able to transform `\$lt` into a set of Rare rules:
+
+\begin{lstlisting}[language=Rust]
+(declare-rare-rule $lt_0 ((_0 Int ) (_1 Int ) )
+  :args (_0 _1 )
+  :premises ((= _0 0) (= _1 0) )
+  :conclusion (= ($lt _0 _1) false))
+
+(declare-rare-rule $lt_1 ((_0 Int ) (_1 Int ) (x Int ) )
+  :args (x _0 _1 )
+  :premises ((= _0 0) (= _1 x) (distinct _1 0) )
+  :conclusion (= ($lt _0 _1) true))
+
+(declare-rare-rule $lt_2 ((_0 Int ) (_1 Int ) (x Int ) (y Int ) )
+  :args (x y _0 _1 )
+  :premises ((= _0 x) (= _1 y) (distinct _0 0) (distinct _1 0) )
+  :conclusion (= ($lt _0 _1) ($lt (- x 1) (- y 1))))
+\end{lstlisting}
+
+Notice now that we generate the guards by using `distinct`. Since `distinct` may not be available, we could optionally translate $(distinct\:x\:y)$ to $(=\:(=\:x\:y)\:false)$ to standardize. Now we just use the same compiler from Rare to Egglog to transform \$lt`.
+
+\begin{lstlisting}[language=Rust]
+(rule ((Available _1)
+       (Available _0))
+      ((union (Mk (@$lt (Args _0 (Args _1 (Empty )))))
+              (Mk (@$lt (Args _0 (Args _1 (Empty ))))))))
+
+(rule ((Available y)
+       (Available x))
+      ((union (Mk (@$lt (Args (Mk (@- (Args x (Args (Mk (Num 1)) (Empty ))))) 
+                            (Args (Mk (@- (Args y (Args (Mk (Num 1)) (Empty ))))) (Empty )))))
+              (Mk (@$lt (Args (Mk (@- (Args x (Args (Mk (Num 1)) (Empty )))))
+                            (Args (Mk (@- (Args y (Args (Mk (Num 1)) (Empty ))))) (Empty ))))))))
+
+(rewrite (Mk (@$lt (Args (Mk _0) (Args (Mk _1) (Empty ))))) (Mk (Bool false)) 
+   :when ((= (Mk _0) (Mk (Num 0))) (= (Mk _1) (Mk (Num 0)))))
+(rewrite (Mk (@$lt (Args (Mk _0) (Args (Mk _1) (Empty ))))) (Mk (Bool true)) 
+   :when ((= (Mk _0) (Mk (Num 0))) (= (Mk _1) (Mk x)) (!= (Mk _1) (Mk (Num 0)))))
+(rewrite (Mk (@$lt (Args (Mk _0) (Args (Mk _1) (Empty ))))) 
+   (Mk (@$lt (Args (Mk (@- (Args (Mk x) (Args (Mk (Num 1)) (Empty ))))) 
+    (Args (Mk (@- (Args (Mk y) (Args (Mk (Num 1)) (Empty ))))) (Empty ))))) 
+   :when ((= (Mk _0) (Mk x)) (= (Mk _1) (Mk y)) 
+      (!= (Mk _0) (Mk (Num 0))) (!= (Mk _1) (Mk (Num 0)))))
+\end{lstlisting}
+
+Notice that we include two other rules. We capture the shape of each pattern to include the terms inside the EGraph for every available premise. Note that we could write instead:
+
+\begin{lstlisting}[language=Rust]
+(rule ((= _1 __var0)
+       (= _0 __var1))
+      ((union (Mk (@$lt (Args __var0 (Args __var1 (Empty )))))
+              (Mk (@$lt (Args __var0 (Args __var1 (Empty ))))))))
+\end{lstlisting}
+
+The rule above adds a new term for every term inside the EGraph, almost doubling it. While this is much more convenient and powerful for proving, it is computationally expensive for equality saturation. First, one could continue applying this rule infinitely, and second, it would double the number of terms in the EGraph in each round. We plan to add a flag to allow these kinds of rules if using the `Available` flag cannot produce a proof.
+Note that the term generated is not marked as available, so no fixpoint is generated if we rely on the `Available` proposition. 
+
+Eunoia also has support for some operators that may work at compile-time. For example, `eo::typeof` is a compile-time expression that extracts the sort of the type; luckily, we have this information in Alethe. Other operators can be written using programs. Moreover, programs can also be parameterized by functions:
+
+\begin{lstlisting}[language=Rust]
+(program substitute
+  ((T Type) (U Type) (S Type) (x S) (y S) (f (-> T U)) (a T) (z U))
+  :signature (S S U) U
+  (
+  ((substitute x y x)     y)
+  ((substitute x y (f a)) (_ (substitute x y f) (substitute x y a)))
+  ((substitute x y z)     z)
+  )
+)
+\end{lstlisting}
+
+\subsection{Evaluation of special parameterized arguments}
+
+By default, Egglog does not support parameterization by functions; we could eliminate this parameterization during a preprocessing step. Since Rare supports parameterization using functions, we could translate the rules to Rare and adapt our compiler to Egglog to support it. Another approach, chosen in this work, is to generate a new rule for each function that the context might apply. For example, if we have in our context `(substitute ... or ...)`, we know that we need to apply substitution and perform a pre-evaluation of substitute to support `or` directly, reducing it to `substitute-or`. This also happens for `definition` statements. Since `definition` statements in Eunoia are functions, we just evaluate them before compiling to Rare. Writing a mini-interpreter is needed to evaluate some constant expressions and to optimize the code generated in Rare. For example, whenever we have an option to evaluate a `program` by checking if it is parameterized by a value already in the context, we should do so. 
+
+\bibliographystyle{alpha}
+\bibliography{sample}
+
+\end{document}
